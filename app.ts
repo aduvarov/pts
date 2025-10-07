@@ -1,42 +1,31 @@
-type httpMethod = 'post' | 'get'
-
-type coolString = string
-
-function fetchWithAuth(url: string, method: httpMethod): 1 | -1 {
-    return 1
-}
-
-let user: {
+interface User {
     name: string
     age: number
     skills: string[]
-} = {
-    name: 'asdf',
-    age: 33,
-    skills: ['1', '1'],
+    log: (id: number) => string
+}
+interface Role {
+    roleId: number
+}
+interface UserWithRole extends User, Role {
+    createdAt: Date
 }
 
-type User = {
-    name: string
-    age: number
-    skills: string[]
-}
-
-let user2: User = {
+let user: UserWithRole = {
     name: 'Anatoliy',
     age: 44,
     skills: ['1', '2'],
+    roleId: 1,
+    createdAt: new Date(),
+    log(id) {
+        return ''
+    },
 }
 
-type Role = {
-    id: number
+interface UserDic {
+    [index: number]: User
 }
 
-type UserWithRole = User & Role // Intersection Type
-
-let user3: UserWithRole = {
-    name: 'Ivan',
-    age: 44,
-    skills: ['1'],
-    id: 2,
+type UserDic2 = {
+    [index: number]: User
 }
