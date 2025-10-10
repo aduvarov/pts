@@ -1,30 +1,17 @@
 "use strict";
-function generateError(message) {
-    throw new Error(message);
-}
-function dumpError() {
-    while (true) { }
-}
-function rec() {
-    return rec();
-}
-function processAction(action) {
-    switch (action) {
-        case 'refund':
-            //...
-            break;
-        case 'checkout':
-            //...
-            break;
-        default:
-            const _ = action;
-            throw new Error('Нет такого action');
+const n = null;
+const n1 = null;
+function getUser() {
+    if (Math.random() > 0.5) {
+        return null;
+    }
+    else {
+        return {
+            name: 'Вася',
+        };
     }
 }
-function isString(x) {
-    if (typeof x === 'string')
-        return true;
-    else if (typeof x === 'number')
-        return false;
-    generateError('sdfsdf');
+const user = getUser();
+if (user) {
+    const uname = user.name; //strictNullChecks
 }
