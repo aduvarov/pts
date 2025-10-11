@@ -1,13 +1,29 @@
 "use strict";
-class User {
-    set login(l) {
-        this._login = 'user-' + l;
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+class Logger {
+    log(...args) {
+        console.log(...args);
     }
-    get login() {
-        return 'no_login';
+    error(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Кинуть во внешнюю систему
+            console.log(...args);
+        });
     }
 }
-const user = new User();
-user.login = 'Ivan';
-console.log(user);
-console.log(user.login);
+class User {
+    delete() {
+        throw new Error('Method not implemented.');
+    }
+    pay(payemntId) {
+        ///
+    }
+}
