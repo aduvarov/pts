@@ -1,18 +1,13 @@
 "use strict";
 class User {
-    constructor() {
-        this.skills = [];
+    set login(l) {
+        this._login = 'user-' + l;
     }
-    addSkill(skillOrSkills) {
-        if (typeof skillOrSkills === 'string') {
-            this.skills.push(skillOrSkills);
-        }
-        else {
-            this.skills = this.skills.concat(skillOrSkills);
-        }
+    get login() {
+        return 'no_login';
     }
 }
-const user1 = new User();
-user1.addSkill('Dev');
-user1.addSkill(['Dev', 'DevOps']);
-console.log(user1);
+const user = new User();
+user.login = 'Ivan';
+console.log(user);
+console.log(user.login);

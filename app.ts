@@ -1,19 +1,21 @@
 class User {
-    skills: string[] = []
+    _login: string
+    _password: string
 
-    addSkill(skill: string): void
-    addSkill(skills: string[]): void
-    addSkill(skillOrSkills: string | string[]): void {
-        if (typeof skillOrSkills === 'string') {
-            this.skills.push(skillOrSkills)
-        } else {
-            this.skills = this.skills.concat(skillOrSkills)
-        }
+    set login(l: string) {
+        this._login = 'user-' + l
+    }
+
+    get login() {
+        return 'no_login'
+    }
+
+    set password(p: string) {
+        // only sync functions in getters or setters
     }
 }
 
-const user1 = new User()
-
-user1.addSkill('Dev')
-user1.addSkill(['Dev', 'DevOps'])
-console.log(user1)
+const user = new User()
+user.login = 'Ivan'
+console.log(user)
+console.log(user.login)
