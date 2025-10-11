@@ -1,10 +1,15 @@
 "use strict";
-const a = { name: 'asdf' };
-assertUser(a);
-a.name = 'Вася';
-function assertUser(obj) {
-    if (typeof obj === 'object' && !!obj && 'name' in obj) {
-        return;
+class User {
+    constructor(name) {
+        //strictPropertyInitialization: false
+        this.name = name;
     }
-    throw new Error('Не пользователь');
 }
+const user = new User('Вася');
+console.log(user);
+user.name = 'Петя';
+console.log(user);
+class Admin {
+}
+const admin = new Admin();
+admin.role = 1;
