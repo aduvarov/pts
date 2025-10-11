@@ -1,33 +1,41 @@
-interface ILogger {
-    log(...args): void
-    error(...args): void
+type PaymentStatus = 'new' | 'paid'
+class Payment {
+    id: number
+    status: PaymentStatus = 'new'
+
+    constructor(id: number) {
+        this.id = id
+    }
+
+    pay() {
+        this.status = 'paid'
+    }
 }
 
-class Logger implements ILogger {
-    log(...args: any[]): void {
-        console.log(...args)
-    }
-    async error(...args: any[]): Promise<void> {
-        // Кинуть во внешнюю систему
-        console.log(...args)
-    }
-}
+class PersistedPayment extends Payment {
+    databaseId: number
+    paidAt: Date
 
-interface IPayble {
-    pay(payemntId: number): void
-    price?: number
-}
-
-interface IDeletable {
-    delete(): void
-}
-
-class User implements IPayble, IDeletable {
-    delete(): void {
-        throw new Error('Method not implemented.')
+    constructor() {
+        const id = Math.random()
+        super(id)
     }
-    pay(payemntId: number): void {
-        ///
+
+    save() {
+        // Сохраняет в базу
     }
-    price?: number | undefined
+
+    // pay(date?: Date) {
+    //     super.pay()
+    //     if (date) {
+    //         this.paidAt = date
+    //     }
+    // }
+
+    override pay(date?: Date) {
+        super.pay()
+        if (date) {
+            this.paidAt = date
+        }
+    }
 }
