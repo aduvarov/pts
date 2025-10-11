@@ -1,29 +1,18 @@
 "use strict";
-var PaymentStatus;
-(function (PaymentStatus) {
-    PaymentStatus[PaymentStatus["Holded"] = 0] = "Holded";
-    PaymentStatus[PaymentStatus["Processd"] = 1] = "Processd";
-    PaymentStatus[PaymentStatus["Reversed"] = 2] = "Reversed";
-})(PaymentStatus || (PaymentStatus = {}));
-class Payment {
-    constructor(id) {
-        this.status = PaymentStatus.Holded;
-        this.createdAt = new Date();
-        this.id = id;
+class User {
+    constructor() {
+        this.skills = [];
     }
-    getPaymentLifeTime() {
-        return new Date().getTime() - this.createdAt.getTime();
-    }
-    unholdPayment() {
-        if (this.status === PaymentStatus.Processd) {
-            throw new Error('Платёж не может возвращён');
+    addSkill(skillOrSkills) {
+        if (typeof skillOrSkills === 'string') {
+            this.skills.push(skillOrSkills);
         }
-        this.status = PaymentStatus.Reversed;
-        this.updatedAt = new Date();
+        else {
+            this.skills = this.skills.concat(skillOrSkills);
+        }
     }
 }
-const payment = new Payment(1);
-payment.unholdPayment();
-console.log(payment);
-const time = payment.getPaymentLifeTime();
-console.log(time);
+const user1 = new User();
+user1.addSkill('Dev');
+user1.addSkill(['Dev', 'DevOps']);
+console.log(user1);
