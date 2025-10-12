@@ -1,30 +1,29 @@
-class Payment {
-    private date: Date = new Date()
+class UserBuilder {
+    name: string
 
-    getDate(this: Payment) {
-        return this.date
+    setName(name: string): this {
+        this.name = name
+        return this
     }
 
-    getDateArrow = () => {
-        return this.date
-    }
-}
-
-const p = new Payment()
-
-console.log(p.getDate())
-
-const user = {
-    id: 1,
-    paymentDate: p.getDate.bind(p),
-}
-
-console.log(user.paymentDate())
-
-class PaymentPersistent extends Payment {
-    save() {
-        return this.getDateArrow()
+    isAdmin(): this is AdminBuilder {
+        return this instanceof AdminBuilder
     }
 }
 
-console.log(new PaymentPersistent().save())
+class AdminBuilder extends UserBuilder {
+    roles: string[]
+}
+
+const res = new UserBuilder().setName('Вася')
+const res2 = new AdminBuilder().setName('Петя')
+console.log('res ==> ', res)
+console.log('res2 ==> ', res2)
+
+let user: UserBuilder | AdminBuilder = new UserBuilder()
+
+if (user.isAdmin()) {
+    console.log(user)
+} else {
+    console.log(user)
+}
