@@ -1,74 +1,44 @@
-type PaymentStatus = 'new' | 'paid'
-class Payment {
-    id: number
-    status: PaymentStatus = 'new'
-
-    constructor(id: number) {
-        this.id = id
-    }
-
-    pay() {
-        this.status = 'paid'
-    }
-}
-
-class PersistedPayment extends Payment {
-    databaseId: number
-    paidAt: Date
-
-    constructor() {
-        const id = Math.random()
-        super(id)
-    }
-
-    save() {
-        // Сохраняет в базу
-    }
-
-    // pay(date?: Date) {
-    //     super.pay()
-    //     if (date) {
-    //         this.paidAt = date
-    //     }
-    // }
-
-    override pay(date?: Date) {
-        super.pay()
-        if (date) {
-            this.paidAt = date
-        }
-    }
-}
-
-new PersistedPayment()
-
 class User {
-    name: string = 'user'
-
-    constructor() {
-        console.log(this.name)
+    name: string
+    constructor(name: string) {
+        this.name = name
     }
 }
 
-class Admin extends User {
-    name: string = 'admin'
-
-    constructor() {
-        super()
-        console.log(this.name + ' from admin constuctor')
+class Users extends Array<User> {
+    searchByName(name: string) {
+        return this.filter(u => u.name === name)
     }
 }
 
-const person = new Admin()
-console.log(person.name)
+const users = new Users()
 
-new Error('')
+users.push(new User('Вася'))
+console.log(users.toString())
 
-class HttpError extends Error {
-    code: number
+class UsersList {
+    users: User[]
 
-    constructor(message: string, code?: number) {
-        super(message)
-        this.code = code ?? 500
+    push(u: User) {
+        this.users.push(u)
+    }
+}
+
+class Payment {
+    data: Date
+}
+
+class UserWithPayment extends Payment {
+    // Не рекомендуется разная предметная область
+    name: string
+}
+
+class UserWithPayment2 {
+    user: User
+    payment: Payment
+
+    constructor(user: User, payment: Payment) {
+        this.user = user
+        this.payment = payment
     }
 }
