@@ -1,14 +1,23 @@
 "use strict";
-class User {
-    constructor(name) {
-        this.name = name;
+var _Vehicle_price;
+class Vehicle {
+    constructor() {
+        _Vehicle_price.set(this, void 0);
+    }
+    set model(m) {
+        this._model = m;
+    }
+    get model() {
+        return this._model;
+    }
+    addDamage(damage) {
+        this.damages.push(damage);
     }
 }
-class Users extends Array {
-    searchByName(name) {
-        return this.filter(u => u.name === name);
+_Vehicle_price = new WeakMap();
+class EuroTruck extends Vehicle {
+    setRun(km) {
+        this.run = km / 0.62;
     }
 }
-const users = new Users();
-users.push(new User('Вася'));
-console.log(users.toString());
+new Vehicle().make = 'd';
