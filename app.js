@@ -1,26 +1,25 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-class UserService {
-    constructor(id) { }
-    static getUser(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return UserService.db.findById(id);
-        });
+class Payment {
+    constructor() {
+        this.date = new Date();
+        this.getDateArrow = () => {
+            return this.date;
+        };
     }
-    create() { }
+    getDate() {
+        return this.date;
+    }
 }
-(() => {
-    UserService.db = 'sdf';
-})();
-UserService.db;
-UserService.getUser(1);
-const inst = new UserService(1);
-inst.create();
+const p = new Payment();
+console.log(p.getDate());
+const user = {
+    id: 1,
+    paymentDate: p.getDate.bind(p),
+};
+console.log(user.paymentDate());
+class PaymentPersistent extends Payment {
+    save() {
+        return this.getDateArrow();
+    }
+}
+console.log(new PaymentPersistent().save());

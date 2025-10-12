@@ -1,19 +1,30 @@
-class UserService {
-    static db: any
+class Payment {
+    private date: Date = new Date()
 
-    constructor(id: number) {}
-    static async getUser(id: number) {
-        return UserService.db.findById(id)
+    getDate(this: Payment) {
+        return this.date
     }
 
-    create() {}
-
-    static {
-        UserService.db = 'sdf'
+    getDateArrow = () => {
+        return this.date
     }
 }
 
-UserService.db
-UserService.getUser(1)
-const inst = new UserService(1)
-inst.create()
+const p = new Payment()
+
+console.log(p.getDate())
+
+const user = {
+    id: 1,
+    paymentDate: p.getDate.bind(p),
+}
+
+console.log(user.paymentDate())
+
+class PaymentPersistent extends Payment {
+    save() {
+        return this.getDateArrow()
+    }
+}
+
+console.log(new PaymentPersistent().save())
