@@ -12,9 +12,9 @@
         "removeComments": false,
         "noEmit": false, // проверить но не эмитить
         "noEmitOnError": true, // не эмитить при ошибках
-        "declaration": true,
-        "composite": true,
-        "declarationDir": "./types/",
+        // "declaration": true,
+        // "composite": true,
+        // "declarationDir": "./types/",
 
         //
         "rootDir": "./src/",
