@@ -17,6 +17,9 @@
         "noEmitOnError": true, // не эмитить при ошибках
         "declaration": true,
         "composite": true,
-        "declarationDir": "./types/"
+        "declarationDir": "./types/",
+
+        //
+        "rootDir": "./src/"
     }
 }
