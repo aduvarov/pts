@@ -1,24 +1,21 @@
 "use strict";
-function test(a) { }
-function test2(a) {
-    if (a > 0) {
-        return a;
+class User {
+    constructor(name) {
+        this.name = name;
     }
 }
-function test3(a) {
-    return a;
-}
-// let f: StrOrNumFunc = test3
-// f('sdf')
-class A {
-    test() {
-        return function () {
-            // this.b = 5
-        };
+function createUser(user) {
+    //logic
+    // const defaultUser = new User('default')
+    // defaultUser.role = undefined
+    switch (user.role) {
+        // case 'admin':
+        //     const a = 7
+        case 'user':
+            return true;
+        // const c = 1
     }
 }
-try {
-}
-catch (error) {
-    // console.log(error.message) // useUnknownInCatchVariables
-}
+const c = {};
+const d = c['drive'];
+// c.drive

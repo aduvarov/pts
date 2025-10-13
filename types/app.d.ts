@@ -1,8 +1,11 @@
-declare function test(a: any): void;
-declare function test2(a: number): number | undefined;
-declare function test3(a: number): number;
-type StrOrNumFunc = (a: number | string) => number;
-declare class A {
-    b: number;
-    test(): () => void;
+declare class User {
+    name: string;
+    role?: 'admin' | 'user';
+    constructor(name: string);
 }
+declare function createUser(user: User): true | undefined;
+interface IChecks {
+    [check: string]: boolean;
+}
+declare const c: IChecks;
+declare const d: boolean | undefined;

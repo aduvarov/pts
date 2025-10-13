@@ -1,31 +1,33 @@
-function test(a: any) {}
-
-function test2(a: number): number | undefined {
-    if (a > 0) {
-        return a
+class User {
+    name: string
+    role?: 'admin' | 'user'
+    constructor(name: string) {
+        this.name = name
     }
 }
 
-function test3(a: number): number {
-    return a
-}
+function createUser(user: User) {
+    //logic
+    // const defaultUser = new User('default')
+    // defaultUser.role = undefined
 
-type StrOrNumFunc = (a: number | string) => number
+    switch (user.role) {
+        // case 'admin':
+        //     const a = 7
 
-// let f: StrOrNumFunc = test3
-// f('sdf')
-
-class A {
-    b: number
-
-    test() {
-        return function () {
-            // this.b = 5
-        }
+        case 'user':
+            return true
+        // const c = 1
     }
 }
 
-try {
-} catch (error) {
-    // console.log(error.message) // useUnknownInCatchVariables
+// function createAdmin(user: User) {}
+
+interface IChecks {
+    [check: string]: boolean
 }
+
+const c: IChecks = {}
+
+const d = c['drive']
+// c.drive
