@@ -1,19 +1,31 @@
-abstract class Controller {
-    abstract handle(req: any): void
+function test(a: any) {}
 
-    handleWithLogs(req: any) {
-        console.log('Start')
-        this.handle(req)
-        console.log('End')
+function test2(a: number): number | undefined {
+    if (a > 0) {
+        return a
     }
 }
 
-class UserController extends Controller {
-    handle(req: any): void {
-        console.log(req)
+function test3(a: number): number {
+    return a
+}
+
+type StrOrNumFunc = (a: number | string) => number
+
+// let f: StrOrNumFunc = test3
+// f('sdf')
+
+class A {
+    b: number
+
+    test() {
+        return function () {
+            // this.b = 5
+        }
     }
 }
 
-// new Controller() - error
-const c = new UserController()
-c.handleWithLogs('Request')
+try {
+} catch (error) {
+    // console.log(error.message) // useUnknownInCatchVariables
+}

@@ -3,12 +3,9 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es2016",
-        "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "noImplicitAny": false,
-        "strictPropertyInitialization": false,
         //
         /* Emit */
         "outDir": "./build",
@@ -20,6 +17,15 @@
         "declarationDir": "./types/",
 
         //
-        "rootDir": "./src/"
+        "rootDir": "./src/",
+        // TypeChecking
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "noImplicitThis": true
+        //"alwaysStrict": true
+        // "useUnknownInCatchVariables": false
+        // "strictFunctionTypes": false
+        // "noImplicitAny": false, // не явное задание any
+        // "strictNullChecks": false //
     }
 }

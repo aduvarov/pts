@@ -1,16 +1,24 @@
 "use strict";
-class Controller {
-    handleWithLogs(req) {
-        console.log('Start');
-        this.handle(req);
-        console.log('End');
+function test(a) { }
+function test2(a) {
+    if (a > 0) {
+        return a;
     }
 }
-class UserController extends Controller {
-    handle(req) {
-        console.log(req);
+function test3(a) {
+    return a;
+}
+// let f: StrOrNumFunc = test3
+// f('sdf')
+class A {
+    test() {
+        return function () {
+            // this.b = 5
+        };
     }
 }
-// new Controller() - error
-const c = new UserController();
-c.handleWithLogs('Request');
+try {
+}
+catch (error) {
+    // console.log(error.message) // useUnknownInCatchVariables
+}
