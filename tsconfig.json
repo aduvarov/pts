@@ -9,5 +9,10 @@
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
         "strictPropertyInitialization": false
-    }
+        // "allowJs": true,
+        // "checkJs": true
+    },
+    "include": ["app*"],
+    "exclude": ["app.ts"]
+    // "extends": "./moretsconfig.json"
 }
