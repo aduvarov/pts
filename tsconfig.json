@@ -8,11 +8,15 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
-        "strictPropertyInitialization": false
-        // "allowJs": true,
-        // "checkJs": true
-    },
-    "include": ["app*"],
-    "exclude": ["app.ts"]
-    // "extends": "./moretsconfig.json"
+        "strictPropertyInitialization": false,
+        //
+        /* Emit */
+        "outDir": "./build",
+        "removeComments": false,
+        "noEmit": false, // проверить но не эмитить
+        "noEmitOnError": true, // не эмитить при ошибках
+        "declaration": true,
+        "composite": true,
+        "declarationDir": "./types/"
+    }
 }
