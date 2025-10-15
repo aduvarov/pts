@@ -1,33 +1,50 @@
-interface Role {
+const a1: number = Math.random() > 0.5 ? 1 : 0
+
+interface HTTPResponse<T extends 'success' | 'failed'> {
+    code: number
+    data: T extends 'success' ? string : Error
+    // additionalData: string | number
+}
+
+const suc: HTTPResponse<'success'> = {
+    code: 200,
+    data: 'done',
+}
+
+const err: HTTPResponse<'failed'> = {
+    code: 200,
+    data: new Error(),
+}
+
+class User {
+    id: number
     name: string
 }
 
-interface Permission {
-    endDate: Date
+class UserPersistend extends User {
+    dbId: string
 }
-interface User {
-    name: string
-    roles: Role[]
-    permission: Permission
-}
-
-const user: User = {
-    name: 'Вася',
-    roles: [],
-    permission: {
-        endDate: new Date(),
-    },
+function getUser(Id: number): User
+function getUser(dbId: string): UserPersistend
+function getUser(dbIdOrId: string | number): User | UserPersistend {
+    if (typeof dbIdOrId === 'number') {
+        return new User()
+    } else {
+        return new UserPersistend()
+    }
 }
 
-const nameUser = user['name']
-const roleNames = 'roles'
+type UserOrUserPersistend<T extends string | number> = T extends number
+    ? User
+    : UserPersistend
 
-type rolesTypes = User['roles']
-// type roleType2 = User[roleNames] // Error
-type rolesType2 = User[typeof roleNames] // only for const or let roleNames: 'roles' = 'roles'
+function getUser2<T extends string | number>(id: T): UserOrUserPersistend<T> {
+    if (typeof id === 'number') {
+        return new User() as UserOrUserPersistend<T>
+    } else {
+        return new UserPersistend() as UserOrUserPersistend<T>
+    }
+}
 
-type roleType = User['roles'][number]
-type dateType = User['permission']['endDate']
-
-const roles = ['admin', 'user', 'super-user'] as const
-type roleTypes = (typeof roles)[number]
+const res = getUser2(1)
+const res2 = getUser2('1')
