@@ -1,29 +1,33 @@
-let strOrNum: string | number = 5
-
-if (Math.random() > 0.5) {
-    strOrNum = 5
-} else {
-    strOrNum = 'str'
+interface Role {
+    name: string
 }
 
-if (typeof strOrNum === 'string') {
-    console.log(strOrNum)
-} else {
-    console.log(strOrNum)
+interface Permission {
+    endDate: Date
+}
+interface User {
+    name: string
+    roles: Role[]
+    permission: Permission
 }
 
-let str2OrNum: typeof strOrNum
-
-const user = {
+const user: User = {
     name: 'Вася',
-    lastname: 'Пупкин',
+    roles: [],
+    permission: {
+        endDate: new Date(),
+    },
 }
 
-type keyOfUser = keyof typeof user
+const nameUser = user['name']
+const roleNames = 'roles'
 
-enum Direction {
-    Up,
-    Down,
-}
+type rolesTypes = User['roles']
+// type roleType2 = User[roleNames] // Error
+type rolesType2 = User[typeof roleNames] // only for const or let roleNames: 'roles' = 'roles'
 
-type d = keyof typeof Direction
+type roleType = User['roles'][number]
+type dateType = User['permission']['endDate']
+
+const roles = ['admin', 'user', 'super-user'] as const
+type roleTypes = (typeof roles)[number]
