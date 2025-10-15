@@ -1,14 +1,22 @@
-function runTransaction(transaction: { fromTo: [string, string] }) {
-    console.log()
+type Modifier = 'read' | 'update' | 'create'
+
+type UserRoles = {
+    customers: Modifier
+    projects?: Modifier
+    adminPanel?: Modifier
 }
 
-const transaction: GetFirstArg<typeof runTransaction> = {
-    // fromTo: ['1', '2'] as [string, string]
-    fromTo: ['1', '2'],
+type ModifierToAccess<Type> = {
+    readonly [Property in keyof Type as Exclude<
+        `canAccess${string & Property}`,
+        'canAccessadminPanel'
+    >]-?: boolean
 }
 
-type GetFirstArg<T> = T extends (first: infer First, ...args: any[]) => any
-    ? First
-    : never
+type UserAccess2 = ModifierToAccess<UserRoles>
 
-runTransaction(transaction)
+type UserAccess1 = {
+    customers?: boolean
+    projects?: boolean
+    adminPanel?: boolean
+}
