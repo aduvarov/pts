@@ -3,23 +3,24 @@ interface IUserService {
     getUsersInDatabase(): number
 }
 
+@nullUser
+@threeUserAdvanced
 class UserService implements IUserService {
-    users: number = 1000
+    users: number
 
     getUsersInDatabase(): number {
         return this.users
     }
 }
 
-function nullUser(obj: IUserService) {
-    obj.users = 0
-    return obj
+function nullUser(target: Function) {
+    target.prototype.users = 0
 }
 
-function logUsers(obj: IUserService) {
-    console.log('Users: ' + obj.users)
-    return obj
+function threeUserAdvanced<T extends { new (...args: any[]): {} }>(constructor: T) {
+    return class extends constructor {
+        users = 3
+    }
 }
 
 console.log(new UserService().getUsersInDatabase())
-logUsers(nullUser(new UserService()))

@@ -29,7 +29,8 @@
         "allowUnreachableCode": false,
         "noUncheckedIndexedAccess": true,
         "noPropertyAccessFromIndexSignature": true,
-        "noImplicitOverride": true
+        "noImplicitOverride": true,
+        "experimentalDecorators": true
 
         //"alwaysStrict": true
         // "useUnknownInCatchVariables": false
