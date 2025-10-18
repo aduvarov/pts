@@ -1,39 +1,27 @@
 interface IUserService {
-    users: number
     getUsersInDatabase(): number
 }
 
 class UserService implements IUserService {
     _users: number // = 1000
 
-    set users(num: number) {
-        this._users = num
-    }
-
-    @Log()
-    get users() {
+    getUsersInDatabase(): number {
         return this._users
     }
 
-    getUsersInDatabase(): number {
-        throw new Error('Ошибка')
+    setUsersInDatabase(@Positive() num: number): void {
+        this._users = num
     }
 }
 
-function Log() {
-    return (
-        target: Object,
-        _: string | symbol, // propertyKey
-        descriptor: PropertyDescriptor
-    ) => {
-        const set = descriptor.set
-        descriptor.set = (...args: any) => {
-            console.log(args)
-            set?.apply(target, args)
-        }
+function Positive() {
+    return (target: Object, propertyKey: string | symbol, parameterIndex: number) => {
+        console.log(target)
+        console.log(propertyKey)
+        console.log(parameterIndex)
     }
 }
 
 const userService = new UserService()
-userService.users = 1
+// userService.users = 1
 // console.log(userService.users)
