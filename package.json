@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "-   Метаданные позволяют добавлять дополнительную информацию к вашему коду. -   В JavaScript и TypeScript метаданные могут быть использованы для определения типов данных во время выполнения (runtime). -   Библиотека `ReflectMetadata` используется для работы с метаданными, особенно в Angular и NestJS. -   Метаданные могут быть полезны для dependency injection и типовой валидации.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,15 +1,15 @@
 {
     // Visit https://aka.ms/tsconfig to read more about this file
     "compilerOptions": {
-        "module": "AMD",
+        "module": "es6",
         "target": "es2016",
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         //
         /* Emit */
-        // "outDir": "./build",
-        "outFile": "./app.js",
+        "outDir": "./build",
+        // "outFile": "./app.js",
         "removeComments": false,
         "noEmit": false, // проверить но не эмитить
         "noEmitOnError": true, // не эмитить при ошибках
