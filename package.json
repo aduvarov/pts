@@ -17,6 +17,7 @@
     },
     "homepage": "https://github.com/aduvarov/pts#readme",
     "dependencies": {
+        "really-relaxed-json": "^0.3.2",
         "reflect-metadata": "^0.2.2"
     }
 }

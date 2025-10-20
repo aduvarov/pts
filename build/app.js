@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { A } from './module/app2'
-const app2_js_1 = require("./module/app2.js");
-// console.log(A.a)
-console.log(app2_js_1.a);
+// //@ts-ignore
+const really_relaxed_json_1 = require("really-relaxed-json");
+const rjson = '[ one two three {foo:bar} ]';
+const json = (0, really_relaxed_json_1.toJson)(rjson);
+console.log(json);
