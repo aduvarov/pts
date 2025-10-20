@@ -1,42 +1,46 @@
 {
     // Visit https://aka.ms/tsconfig to read more about this file
     "compilerOptions": {
+        // File Layout
+        // "rootDir": "./src",
+        "outDir": "./dist",
+        "experimentalDecorators": false,
+        // "emitDecoratorMetadata": false,
+        // "useDefineForClassFields": false,
+        // Environment Settings
+        // See also https://aka.ms/tsconfig/module
         "module": "commonjs",
-        "target": "es2016",
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        //
-        /* Emit */
-        "outDir": "./build",
-        "removeComments": false,
-        "noEmit": false, // проверить но не эмитить
-        "noEmitOnError": true, // не эмитить при ошибках
-        // "declaration": true,
-        // "composite": true,
-        // "declarationDir": "./types/",
-        "emitDecoratorMetadata": true,
+        "target": "es2022",
+        "types": [],
+        // For nodejs:
+        // "lib": ["esnext"],
+        // "types": ["node"],
+        // and npm install -D @types/node
 
-        //
-        "rootDir": "./src/",
-        // TypeChecking
-        "strict": true,
-        "strictPropertyInitialization": false,
-        "noImplicitThis": true,
-        "noUnusedLocals": true,
-        // "noUnusedParameters": true,
-        "exactOptionalPropertyTypes": true,
-        "noFallthroughCasesInSwitch": true,
-        "allowUnreachableCode": false,
+        // Other Outputs
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+
+        // Stricter Typechecking Options
         "noUncheckedIndexedAccess": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "noImplicitOverride": true,
-        "experimentalDecorators": true
+        "exactOptionalPropertyTypes": true,
 
-        //"alwaysStrict": true
-        // "useUnknownInCatchVariables": false
-        // "strictFunctionTypes": false
-        // "noImplicitAny": false, // не явное задание any
-        // "strictNullChecks": false //
+        // Style Options
+        // "noImplicitReturns": true,
+        // "noImplicitOverride": true,
+        // "noUnusedLocals": true,
+        // "noUnusedParameters": true,
+        // "noFallthroughCasesInSwitch": true,
+        // "noPropertyAccessFromIndexSignature": true,
+
+        // Recommended Options
+        "strict": true,
+        "jsx": "react-jsx",
+        "verbatimModuleSyntax": true,
+        // "isolatedModules": true,
+        // "noUncheckedSideEffectImports": true,
+        "moduleDetection": "force",
+        "skipLibCheck": true
     }
 }
