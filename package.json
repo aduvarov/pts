@@ -1,0 +1,22 @@
+{
+  "name": "5-typescript-demo-1",
+  "version": "1.0.0",
+  "description": "-   Метаданные позволяют добавлять дополнительную информацию к вашему коду. -   В JavaScript и TypeScript метаданные могут быть использованы для определения типов данных во время выполнения (runtime). -   Библиотека `ReflectMetadata` используется для работы с метаданными, особенно в Angular и NestJS. -   Метаданные могут быть полезны для dependency injection и типовой валидации.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aduvarov/pts.git"
+  },
+  "author": "Anatoly Uvarov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aduvarov/pts/issues"
+  },
+  "homepage": "https://github.com/aduvarov/pts#readme",
+  "dependencies": {
+    "reflect-metadata": "^0.2.2"
+  }
+}

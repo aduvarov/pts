@@ -15,6 +15,7 @@
         // "declaration": true,
         // "composite": true,
         // "declarationDir": "./types/",
+        "emitDecoratorMetadata": true,
 
         //
         "rootDir": "./src/",
