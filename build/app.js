@@ -1,26 +1,45 @@
 "use strict";
-class PaymentAPI {
+class DeliveryItem {
     constructor() {
-        this.data = [{ id: 1, sum: 10000 }];
+        this.items = [];
     }
-    getPaymentDetail(id) {
-        return this.data.find(d => d.id === id);
+    addItem(item) {
+        this.items.push(item);
     }
-}
-class PeymentAccessProxy {
-    constructor(api, userId) {
-        this.api = api;
-        this.userId = userId;
-    }
-    getPaymentDetail(id) {
-        if (this.userId === 1) {
-            return this.api.getPaymentDetail(id);
-        }
-        console.log('Попытка получить данные платежа!');
-        return undefined;
+    getItemPrices() {
+        return this.items.reduce((acc, item) => (acc += item.getPrice()), 0);
     }
 }
-const proxy = new PeymentAccessProxy(new PaymentAPI(), 1);
-console.log(proxy.getPaymentDetail(1));
-const proxy2 = new PeymentAccessProxy(new PaymentAPI(), 2);
-console.log(proxy2.getPaymentDetail(1));
+class DeliveryShop extends DeliveryItem {
+    constructor(deliveryFee) {
+        super();
+        this.deliveryFee = deliveryFee;
+    }
+    getPrice() {
+        return this.getItemPrices() + this.deliveryFee;
+    }
+}
+class Package extends DeliveryItem {
+    getPrice() {
+        return this.getItemPrices();
+    }
+}
+class Product extends DeliveryItem {
+    constructor(price) {
+        super();
+        this.price = price;
+    }
+    getPrice() {
+        return this.price;
+    }
+}
+const shop = new DeliveryShop(100);
+shop.addItem(new Product(1000));
+const pack1 = new Package();
+shop.addItem(pack1);
+pack1.addItem(new Product(200));
+pack1.addItem(new Product(300));
+const pack2 = new Package();
+shop.addItem(pack2);
+pack2.addItem(new Product(30));
+console.log(shop.getPrice());
