@@ -1,42 +1,64 @@
 "use strict";
-class Mediated {
-    setMediator(mediator) {
-        this.mediator = mediator;
+class User {
+    constructor(userId) {
+        this.userId = userId;
     }
 }
-class Notifications {
-    send() {
-        console.log('Отправляю уведомление');
+class CommandHistory {
+    constructor() {
+        this.commands = [];
+    }
+    push(command) {
+        this.commands.push(command);
+    }
+    remove(command) {
+        this.commands = this.commands.filter(c => c.commandId !== command.commandId);
     }
 }
-class Log {
-    log(message) {
-        console.log(message);
+class Command {
+    constructor(history) {
+        this.history = history;
+        this.commandId = Math.random();
     }
 }
-class EventHandler extends Mediated {
-    myEvent() {
-        this.mediator.notify('EventHandler', 'myEvent');
+class AddUserCommand extends Command {
+    constructor(user, reciever, history) {
+        super(history);
+        this.user = user;
+        this.reciever = reciever;
+    }
+    execute() {
+        this.reciever.saveUser(this.user);
+        this.history.push(this);
+    }
+    undo() {
+        this.reciever.deleteUser(this.user.userId);
+        this.history.remove(this);
     }
 }
-class NotificationMediator {
-    constructor(notifications, logger, handler) {
-        this.notifications = notifications;
-        this.logger = logger;
-        this.handler = handler;
+class UserService {
+    saveUser(user) {
+        console.log(`Сохраняю пользователя с id ${user.userId}`);
     }
-    notify(sender, event) {
-        switch (event) {
-            case 'myEvent':
-                this.notifications.send();
-                this.logger.log('Отправлено');
-                break;
-        }
+    deleteUser(userId) {
+        console.log(`Удаляю пользователя с id ${userId}`);
     }
 }
-const handler = new EventHandler();
-const logger = new Log();
-const notifications = new Notifications();
-const m = new NotificationMediator(notifications, logger, handler);
-handler.setMediator(m);
-handler.myEvent();
+class Controller {
+    constructor() {
+        this.history = new CommandHistory();
+    }
+    addReciever(reciever) {
+        this.reciever = reciever;
+    }
+    run() {
+        const addUserCommand = new AddUserCommand(new User(1), this.reciever, this.history);
+        addUserCommand.execute();
+        console.log(addUserCommand.history);
+        addUserCommand.undo();
+        console.log(addUserCommand.history);
+    }
+}
+const controller = new Controller();
+controller.addReciever(new UserService());
+controller.run();

@@ -1,52 +1,75 @@
-interface Mediator {
-    notify(sender: string, event: string): void
+class User {
+    constructor(public userId: number) {}
 }
 
-abstract class Mediated {
-    mediator: Mediator
-    setMediator(mediator: Mediator) {
-        this.mediator = mediator
+class CommandHistory {
+    public commands: Command[] = []
+    push(command: Command) {
+        this.commands.push(command)
+    }
+    remove(command: Command) {
+        this.commands = this.commands.filter(c => c.commandId !== command.commandId)
     }
 }
-class Notifications {
-    send() {
-        console.log('Отправляю уведомление')
-    }
-}
+abstract class Command {
+    public commandId: number
 
-class Log {
-    log(message: string) {
-        console.log(message)
-    }
-}
+    abstract execute(): void
 
-class EventHandler extends Mediated {
-    myEvent() {
-        this.mediator.notify('EventHandler', 'myEvent')
+    constructor(public history: CommandHistory) {
+        this.commandId = Math.random()
     }
 }
 
-class NotificationMediator implements Mediator {
+class AddUserCommand extends Command {
     constructor(
-        public notifications: Notifications,
-        public logger: Log,
-        public handler: EventHandler
-    ) {}
-    notify(sender: string, event: string): void {
-        switch (event) {
-            case 'myEvent':
-                this.notifications.send()
-                this.logger.log('Отправлено')
-                break
-        }
+        private user: User,
+        private reciever: UserService,
+        history: CommandHistory
+    ) {
+        super(history)
+    }
+
+    execute(): void {
+        this.reciever.saveUser(this.user)
+        this.history.push(this)
+    }
+
+    undo() {
+        this.reciever.deleteUser(this.user.userId)
+        this.history.remove(this)
     }
 }
 
-const handler = new EventHandler()
-const logger = new Log()
-const notifications = new Notifications()
+class UserService {
+    saveUser(user: User) {
+        console.log(`Сохраняю пользователя с id ${user.userId}`)
+    }
+    deleteUser(userId: number) {
+        console.log(`Удаляю пользователя с id ${userId}`)
+    }
+}
 
-const m = new NotificationMediator(notifications, logger, handler)
+class Controller {
+    reciever: UserService
+    history: CommandHistory = new CommandHistory()
 
-handler.setMediator(m)
-handler.myEvent()
+    addReciever(reciever: UserService) {
+        this.reciever = reciever
+    }
+    run() {
+        const addUserCommand = new AddUserCommand(
+            new User(1),
+            this.reciever,
+            this.history
+        )
+        addUserCommand.execute()
+        console.log(addUserCommand.history)
+        addUserCommand.undo()
+        console.log(addUserCommand.history)
+    }
+}
+
+const controller = new Controller()
+controller.addReciever(new UserService())
+controller.run()
