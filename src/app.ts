@@ -1,52 +1,42 @@
-interface IProvider {
-    sendMessage(message: string): void
-    connect(config: unknown): void
-    disconnect(): void
+class Notifiy {
+    send(template: string, to: string) {
+        console.log(`Отправляю ${template}: ${to}`)
+    }
 }
 
-class TelegramProvider implements IProvider {
-    sendMessage(message: string): void {
+class Log {
+    log(message: string) {
         console.log(message)
     }
-    connect(config: string): void {
-        console.log(config)
-    }
-    disconnect(): void {
-        console.log('Disconected TG')
+}
+
+class Template {
+    private templates = [{ name: 'other', template: '<h1>Шаблон!</h1>' }]
+    getByName(name: string) {
+        return this.templates.find(t => t.name === name)
     }
 }
 
-class WhatsUpProvider implements IProvider {
-    sendMessage(message: string): void {
-        console.log(message)
+class NotificationFacade {
+    private notify: Notifiy
+    private logger: Log
+    private template: Template
+
+    constructor() {
+        this.notify = new Notifiy()
+        this.logger = new Log()
+        this.template = new Template()
     }
-    connect(config: string): void {
-        console.log(config)
-    }
-    disconnect(): void {
-        console.log('Disconected WhatsUp')
+    send(to: string, templateName: string) {
+        const data = this.template.getByName(templateName)
+        if (!data) {
+            this.logger.log('Не найден шаблон!')
+            return
+        }
+        this.notify.send(data.template, to)
+        this.logger.log('Шаблон отправлен')
     }
 }
 
-class NotificationSender {
-    constructor(private provider: IProvider) {}
-
-    send() {
-        this.provider.connect('connect')
-        this.provider.sendMessage('message')
-        this.provider.disconnect()
-    }
-}
-
-class DelayNotificationSender extends NotificationSender {
-    constructor(provider: IProvider) {
-        super(provider)
-    }
-    sendDelayed() {}
-}
-
-const sender = new NotificationSender(new TelegramProvider())
-sender.send()
-
-const sender2 = new NotificationSender(new WhatsUpProvider())
-sender2.send()
+const s = new NotificationFacade()
+s.send('user@mail.ru', 'other')

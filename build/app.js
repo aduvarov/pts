@@ -1,43 +1,37 @@
 "use strict";
-class TelegramProvider {
-    sendMessage(message) {
+class Notifiy {
+    send(template, to) {
+        console.log(`Отправляю ${template}: ${to}`);
+    }
+}
+class Log {
+    log(message) {
         console.log(message);
     }
-    connect(config) {
-        console.log(config);
+}
+class Template {
+    constructor() {
+        this.templates = [{ name: 'other', template: '<h1>Шаблон!</h1>' }];
     }
-    disconnect() {
-        console.log('Disconected TG');
+    getByName(name) {
+        return this.templates.find(t => t.name === name);
     }
 }
-class WhatsUpProvider {
-    sendMessage(message) {
-        console.log(message);
+class NotificationFacade {
+    constructor() {
+        this.notify = new Notifiy();
+        this.logger = new Log();
+        this.template = new Template();
     }
-    connect(config) {
-        console.log(config);
-    }
-    disconnect() {
-        console.log('Disconected WhatsUp');
-    }
-}
-class NotificationSender {
-    constructor(provider) {
-        this.provider = provider;
-    }
-    send() {
-        this.provider.connect('connect');
-        this.provider.sendMessage('message');
-        this.provider.disconnect();
+    send(to, templateName) {
+        const data = this.template.getByName(templateName);
+        if (!data) {
+            this.logger.log('Не найден шаблон!');
+            return;
+        }
+        this.notify.send(data.template, to);
+        this.logger.log('Шаблон отправлен');
     }
 }
-class DelayNotificationSender extends NotificationSender {
-    constructor(provider) {
-        super(provider);
-    }
-    sendDelayed() { }
-}
-const sender = new NotificationSender(new TelegramProvider());
-sender.send();
-const sender2 = new NotificationSender(new WhatsUpProvider());
-sender2.send();
+const s = new NotificationFacade();
+s.send('user@mail.ru', 'other');
