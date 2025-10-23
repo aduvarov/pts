@@ -1,43 +1,12 @@
 {
-    // Visit https://aka.ms/tsconfig to read more about this file
     "compilerOptions": {
         "module": "commonjs",
         "target": "es2016",
-        "esModuleInterop": true,
+        "strict": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        //
-        /* Emit */
-        "outDir": "./build",
-        // "outFile": "./app.js",
-        "removeComments": false,
-        "noEmit": false, // проверить но не эмитить
-        "noEmitOnError": true, // не эмитить при ошибках
-        // "declaration": true,
-        // "composite": true,
-        // "declarationDir": "./types/",
-        "emitDecoratorMetadata": true,
-
-        //
-        "rootDir": "./src/",
-        // TypeChecking
-        "strict": true,
-        "strictPropertyInitialization": false,
-        "noImplicitThis": true,
-        "noUnusedLocals": true,
-        // "noUnusedParameters": true,
-        "exactOptionalPropertyTypes": true,
-        "noFallthroughCasesInSwitch": true,
-        "allowUnreachableCode": false,
-        "noUncheckedIndexedAccess": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "noImplicitOverride": true,
-        "experimentalDecorators": true
-
-        //"alwaysStrict": true
-        // "useUnknownInCatchVariables": false
-        // "strictFunctionTypes": false
-        // "noImplicitAny": false, // не явное задание any
-        // "strictNullChecks": false //
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "rootDir": "./src"
     }
 }

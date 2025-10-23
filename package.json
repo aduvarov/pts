@@ -1,23 +1,26 @@
 {
-    "name": "5-typescript-demo-1",
-    "version": "1.0.0",
-    "description": "-   Метаданные позволяют добавлять дополнительную информацию к вашему коду. -   В JavaScript и TypeScript метаданные могут быть использованы для определения типов данных во время выполнения (runtime). -   Библиотека `ReflectMetadata` используется для работы с метаданными, особенно в Angular и NestJS. -   Метаданные могут быть полезны для dependency injection и типовой валидации.",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/aduvarov/pts.git"
-    },
-    "author": "Anatoly Uvarov",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/aduvarov/pts/issues"
-    },
-    "homepage": "https://github.com/aduvarov/pts#readme",
-    "dependencies": {
-        "really-relaxed-json": "^0.3.2",
-        "reflect-metadata": "^0.2.2"
-    }
+  "name": "command-executer",
+  "version": "1.0.0",
+  "description": "-   **Наивная реализация** является хорошим стартом для разработки, так как она позволяет понять базовые принципы и потребности вашего проекта. -   После наивной реализации становится ясно, какие аспекты можно улучшить или оптимизировать.",
+  "homepage": "https://github.com/aduvarov/pts#readme",
+  "bugs": {
+    "url": "https://github.com/aduvarov/pts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aduvarov/pts.git"
+  },
+  "license": "ISC",
+  "author": "Anton Larichev",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.0"
+  }
 }
