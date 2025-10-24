@@ -13,7 +13,7 @@ export class FileService {
 
     public getFilePath(path: string, name: string, ext: string): string {
         if (!isAbsolute(path)) {
-            path = join(__dirname, +'/' + path)
+            path = join(__dirname, '..', '..', '..', path)
         }
         return join(dirname(path) + '/' + name + '.' + ext)
     }
